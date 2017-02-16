@@ -1,0 +1,41 @@
+<html>
+<head>
+    <script src="https://js.leapmotion.com/leap-0.6.4.min.js"></script>
+</head>
+<body>
+    <p style="margin-left: 100px" id="info"></p>
+    <p style="margin-left: 400px" id="output"></p>
+    <script>
+    var info = document.getElementById("info");
+    var output = document.getElementById("output");
+    var frameString, handString, fingerString;
+    //var frameString = '', handString = '', fingerString = '';
+    var hand, finger;
+
+
+    function concatData(id,data){
+    return id + ":" + data + "<br>";
+    }
+
+    var controller = new Leap.Controller({
+     host: '127.0.0.1',
+     port: 6437,
+     enableGestures: true,
+     frameEventName: 'animationFrame',
+     useAllPlugins: true
+    });
+
+    controller.connect();
+    controller.setBackground(true);
+    controller.on('frame', onFrame);
+    function onFrame(frame) {
+        info.innerHTML = frame.id;
+        frameString=concatData("frame_id",frame.id);
+        frameString+=concatData("num_hands",frame.hands.length);
+        frameString+=concatData("num_fingers",frame.fingers.length);
+        frameString+= "<br>"
+        output.innerHTML = frameString;
+    }
+    </script>
+</body>
+</html>

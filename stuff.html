@@ -10,36 +10,31 @@
 
 </body>
 
-<script src="//js.leapmotion.com/leap-0.6.2.min.js"></script>
+<script src="https://js.leapmotion.com/leap-0.6.2.min.js"></script>
+<script src="https://js.leapmotion.com/leap-plugins-0.1.12.js"></script>
+<script src="https://js.leapmotion.com/leap.rigged-hand-0.1.7.js"></script>
 <script type="text/javascript">
 	
 function concatData(id,data){
-
-	return id + " : " data + " <br> ";
+	return id + ":" data + "<br>";
 }
 
-var output = document.getElementById("output");
 
+var output = document.getElementById("output");
 var frameString = '', handString = '', fingerString = '';
 var hand, finger;
-
 //LEAP loop
-
 var options = {enableGestures: true};
 
-
 Leap.loop(options,function(frame){
+
 	frameString=concatData("frame_id",frame.id);
 	frameString+=concatData("num_hands",frame.hands.length);
 	frameString+=concatData("num_fingers",frame.fingers.length);
 	frameString+= "<br>"
 
 	output.innerHTML = frameString;
-
-
-
 });
-
 </script>
 
 

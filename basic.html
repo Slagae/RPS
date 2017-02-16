@@ -1,0 +1,26 @@
+<html>
+<head>
+    <script src="https://js.leapmotion.com/leap-0.6.4.min.js"></script>
+</head>
+<body>
+    <p style="margin-left: 100px" id="info"></p>
+    <script>
+    var info = document.getElementById('info');
+
+    var controller = new Leap.Controller({
+     host: '127.0.0.1',
+     port: 6437,
+     enableGestures: true,
+     frameEventName: 'animationFrame',
+     useAllPlugins: true
+    });
+
+    controller.connect();
+    controller.setBackground(true);
+    controller.on('frame', onFrame);
+    function onFrame(frame) {
+        info.innerHTML = frame.id;
+    }
+    </script>
+</body>
+</html>
